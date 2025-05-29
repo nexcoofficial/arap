@@ -3,523 +3,631 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[PRODUCT_NAME] - [TAGLINE]</title>
+    <title>Crystal Shield Spray - Perlindungan Kristal Untuk Semua Permukaan</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
             color: #333;
             overflow-x: hidden;
         }
-        
+
+        /* Animated Background */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="sparkle" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.3)"/></pattern></defs><rect width="100" height="100" fill="url(%23sparkle)"/></svg>');
+            animation: sparkle 3s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero .tagline {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .product-showcase {
+            animation: fadeInUp 1s ease-out 0.4s both;
+            margin: 2rem 0;
+        }
+
+        .product-showcase img {
+            max-width: 300px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .product-showcase img:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(238, 90, 36, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(238, 90, 36, 0.6);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 10px 30px rgba(238, 90, 36, 0.4); }
+            50% { box-shadow: 0 15px 40px rgba(238, 90, 36, 0.7); }
+            100% { box-shadow: 0 10px 30px rgba(238, 90, 36, 0.4); }
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: rgba(0,0,0,0.8);
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-number {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        /* Countdown Timer */
+        .countdown-section {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .countdown-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ff6b6b;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .countdown-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            min-width: 80px;
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 2rem;
+            background: #f8f9fa;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
         }
-        
-        /* Animated Background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(-45deg, #667eea, #764ba2, #667eea, #764ba2);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: transparent;
-            color: white;
-            padding: 60px 0;
+
+        .section-title {
             text-align: center;
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
         }
-        
-        .hero-badge {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
-            padding: 15px 30px;
-            margin-bottom: 30px;
-            display: inline-block;
-            animation: glow 2s infinite alternate;
-        }
-        
-        @keyframes glow {
-            from { box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
-            to { box-shadow: 0 0 30px rgba(255, 255, 255, 0.5); }
-        }
-        
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: slideDown 1s ease;
-        }
-        
-        .hero .subtitle {
-            font-size: 1.6rem;
-            margin-bottom: 30px;
-            opacity: 0.95;
-            animation: slideUp 1s ease 0.3s both;
-        }
-        
-        .social-proof {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 30px 0;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .social-proof h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: #00ff88;
-        }
-        
-        .watching-now {
-            background: linear-gradient(45deg, #ff6b6b, #ffa500);
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
-            font-weight: bold;
-            animation: pulse 2s infinite;
-        }
-        
-        /* Product Images Section */
-        .product-showcase {
-            background: white;
-            padding: 80px 0;
-            text-align: center;
-        }
-        
-        .product-images {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 50px 0;
-        }
-        
-        .product-image {
-            position: relative;
-            overflow: hidden;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .product-image:hover {
-            transform: scale(1.05) rotate(2deg);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-        }
-        
-        .product-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        /* Features Grid */
-        .features {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 80px 0;
-        }
-        
-        .features h2 {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 60px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
+
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
-        
+
         .feature-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 40px 30px;
+            background: white;
+            padding: 2rem;
             border-radius: 20px;
             text-align: center;
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: 3px solid transparent;
         }
-        
+
         .feature-card:hover {
             transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.2);
+            border-color: #667eea;
         }
-        
+
         .feature-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
-        
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            aspect-ratio: 1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
         /* Testimonials */
         .testimonials {
+            padding: 4rem 2rem;
             background: #2c3e50;
             color: white;
-            padding: 80px 0;
         }
-        
-        .testimonial-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .testimonial-header h2 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-        
-        .testimonial-grid {
+
+        .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
-        
+
         .testimonial-card {
             background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 30px;
+            padding: 2rem;
             border-radius: 20px;
-            transition: all 0.3s ease;
+            border-left: 4px solid #ff6b6b;
         }
-        
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255,255,255,0.15);
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
         }
-        
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
         .stars {
             color: #ffd700;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
+            margin-bottom: 1rem;
         }
-        
+
         /* Urgency Section */
         .urgency {
-            background: linear-gradient(45deg, #ff6b6b, #ff4757);
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
             color: white;
-            padding: 60px 0;
+            padding: 3rem 2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
-        
+
         .urgency::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: shine 3s infinite;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,15 61,35 85,35 67,50 73,74 50,59 27,74 33,50 15,35 39,35" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 6s ease-in-out infinite;
         }
-        
-        @keyframes shine {
-            0% { left: -100%; }
-            100% { left: 100%; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
-        
-        .urgency h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            animation: flash 1s infinite alternate;
-        }
-        
-        @keyframes flash {
-            from { opacity: 1; }
-            to { opacity: 0.7; }
-        }
-        
-        .countdown {
-            font-size: 2rem;
-            margin: 20px 0;
-            font-weight: bold;
-            background: rgba(0,0,0,0.3);
-            padding: 15px 30px;
-            border-radius: 50px;
-            display: inline-block;
-        }
-        
-        /* Order Button */
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(45deg, #ff6b6b, #ffa500);
-            color: white;
-            padding: 20px 50px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.4rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+
+        .urgency-content {
             position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            border: none;
+            z-index: 2;
         }
-        
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
+
+        .urgency-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-        
-        .cta-button:hover::before {
-            left: 100%;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
-        }
-        
-        /* Final CTA */
-        .final-cta {
-            background: linear-gradient(135deg, #2c3e50, #34495e);
-            color: white;
-            padding: 100px 0;
+
+        /* Order Section */
+        .order-section {
+            padding: 4rem 2rem;
+            background: #f8f9fa;
             text-align: center;
         }
-        
-        .price-section {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
+
+        .price-box {
+            background: white;
             border-radius: 20px;
-            padding: 50px;
-            margin: 40px 0;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 2rem auto;
         }
-        
-        .price {
-            font-size: 4rem;
-            font-weight: bold;
-            margin: 20px 0;
-            color: #00ff88;
-        }
-        
-        .old-price {
+
+        .original-price {
             text-decoration: line-through;
-            color: #95a5a6;
-            font-size: 2.5rem;
+            color: #999;
+            font-size: 1.2rem;
         }
-        
-        .guarantee {
-            background: linear-gradient(45deg, #00ff88, #00cc66);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
+
+        .current-price {
+            font-size: 3rem;
             font-weight: bold;
+            color: #ff6b6b;
+            margin: 1rem 0;
         }
-        
+
+        .offer-text {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        /* Floating Notifications */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.5s ease;
+            max-width: 300px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
             }
             
-            .hero .subtitle {
-                font-size: 1.2rem;
+            .hero .tagline {
+                font-size: 1.1rem;
             }
             
-            .product-images {
+            .stats-bar {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+                padding: 0.5rem;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+            }
+            
+            .features-grid,
+            .testimonials-grid,
+            .gallery-grid {
                 grid-template-columns: 1fr;
             }
             
-            .price {
-                font-size: 3rem;
+            .urgency-title {
+                font-size: 2rem;
             }
             
-            .container {
-                padding: 0 15px;
+            .current-price {
+                font-size: 2.5rem;
+            }
+            
+            .notification {
+                right: 10px;
+                max-width: calc(100vw - 20px);
             }
         }
-        
-        /* Animations */
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-50px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
         }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
         }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .fade-in {
+
+        .loading.hide {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
+            pointer-events: none;
         }
-        
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="animated-bg"></div>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            👁️ <span class="stat-number" id="viewers">1,247</span> orang sedang melihat
+        </div>
+        <div class="stat-item">
+            📦 Stok tersisa: <span class="stat-number" id="stock">23</span> unit
+        </div>
+        <div class="stat-item">
+            🔥 <span class="stat-number" id="sold">156</span> terjual hari ini
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span style="color:#008B8B; font-size: 1.2rem; font-weight: bold;">[QUALITY_BADGE]</span>
-                </div>
-                
-                <h1>[PRODUCT_NAME]</h1>
-                <p class="subtitle">[PRODUCT_SUBTITLE]</p>
-                
-                <div class="social-proof">
-                    <h3>👍 Telah direkomendasikan oleh <span style="color:#00ff88">[SOCIAL_PROOF_COUNT]</span> <span style="color:#ff6b6b">di Facebook, Twitter, dan Instagram</span></h3>
-                    
-                    <div class="watching-now">
-                        👀 <span id="viewers">[VIEWERS_COUNT]</span> orang <span style="color:#00ff88">sedang menonton ini sekarang</span>
-                    </div>
-                </div>
-                
-                <button class="cta-button" onclick="orderNow()">[CTA_TEXT]</button>
+        <div class="hero-content">
+            <h1>RayHong Quick Effect Coating</h1>
+            <p class="tagline">Instant Coating Mirror-Like Shine - One Spray, One Wipe, Instantly Turns Into a New Car!</p>
+            
+            <div class="product-showcase">
+                <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="RayHong Quick Effect Coating - Instant Mirror Shine" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9InByb2R1Y3RHcmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMzNTQ4ZGIiLz4KPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiM2NjdlZWEiLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZiZjNiIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9InVybCgjcHJvZHVjdEdyYWRpZW50KSIvPgo8Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMDAiIHI9IjQwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuOSkiLz4KPHRleHQgeD0iMTUwIiB5PSIxNDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iYm9sZCI+UmF5SG9uZzwvdGV4dD4KPHRleHQgeD0iMTUwIiB5PSIxNjQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LXNpemU9IjE0Ij5RdWljayBFZmZlY3Q8L3RleHQ+Cjx0ZXh0IHg9IjE1MCIgeT0iMTg0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIxNCI+Q29hdGluZyBBZ2VudDwvdGV4dD4KPHRleHQgeD0iMTUwIiB5PSIyMTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC44KSIgZm9udC1zaXplPSIxMiI+SW5zdGFudCBNaXJyb3IgU2hpbmU8L3RleHQ+Cjwvc3ZnPg=='">
             </div>
+            
+            <a href="https://mila.orderonline.id/crystal-shield-spray" class="cta-button">🛒 BELI SEKARANG - BELI 2 GRATIS 1!</a>
         </div>
     </section>
 
-    <!-- Product Showcase -->
-    <section class="product-showcase">
-        <div class="container">
-            <div class="quality-badge" style="background: linear-gradient(45deg, #00ff88, #00cc66); color: white; padding: 20px 40px; border-radius: 50px; font-size: 1.5rem; font-weight: bold; display: inline-block; margin-bottom: 30px; animation: bounce 2s infinite;">
-                [GUARANTEE_TEXT]
+    <!-- Countdown Timer -->
+    <section class="countdown-section">
+        <h2 class="countdown-title">⏰ PROMO TERBATAS BERAKHIR DALAM:</h2>
+        <div class="countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">23</div>
+                <div class="countdown-label">Jam</div>
             </div>
-            
-            <div class="product-images">
-                <!-- REPLACE WITH ACTUAL PRODUCT IMAGES -->
-                <div class="product-image floating">
-                    <img src="[IMAGE_1_URL]" alt="[PRODUCT_NAME]">
-                </div>
-                <div class="product-image">
-                    <img src="[IMAGE_2_URL]" alt="[PRODUCT_NAME]">
-                </div>
-                <div class="product-image">
-                    <img src="[IMAGE_3_URL]" alt="[PRODUCT_NAME]">
-                </div>
-                <div class="product-image">
-                    <img src="[IMAGE_4_URL]" alt="[PRODUCT_NAME]">
-                </div>
-                <!-- ADD MORE IMAGES AS NEEDED -->
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">45</div>
+                <div class="countdown-label">Menit</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">32</div>
+                <div class="countdown-label">Detik</div>
             </div>
         </div>
+        <p>Jangan sampai terlewat! Harga akan kembali normal setelah promo berakhir.</p>
     </section>
 
     <!-- Features Section -->
-    <section class="features fade-in">
+    <section class="features">
         <div class="container">
-            <h2>[FEATURES_HEADLINE]</h2>
+            <h2 class="section-title">✨ 4 Keunggulan Crystal Shield Spray</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">[FEATURE_1_ICON]</div>
-                    <h3>[FEATURE_1_TITLE]</h3>
-                    <p>[FEATURE_1_DESCRIPTION]</p>
+                    <div class="feature-icon">🛡️</div>
+                    <h3 class="feature-title">Perlindungan Maximum</h3>
+                    <p>Formula nano coating yang membentuk lapisan pelindung tak kasat mata, mencegah noda dan jamur menempel hingga 6 bulan!</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">[FEATURE_2_ICON]</div>
-                    <h3>[FEATURE_2_TITLE]</h3>
-                    <p>[FEATURE_2_DESCRIPTION]</p>
+                    <div class="feature-icon">✨</div>
+                    <h3 class="feature-title">Hasil Mengkilap Kristal</h3>
+                    <p>Memberikan kilau seperti kristal pada semua permukaan - kaca, keramik, marmer, stainless steel, dan plastik!</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">[FEATURE_3_ICON]</div>
-                    <h3>[FEATURE_3_TITLE]</h3>
-                    <p>[FEATURE_3_DESCRIPTION]</p>
+                    <div class="feature-icon">💧</div>
+                    <h3 class="feature-title">Water Repellent Technology</h3>
+                    <p>Air langsung mengalir turun tanpa meninggalkan bekas! Efek hydrophobic yang tahan lama membuat permukaan selalu kering.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">[FEATURE_4_ICON]</div>
-                    <h3>[FEATURE_4_TITLE]</h3>
-                    <p>[FEATURE_4_DESCRIPTION]</p>
+                    <div class="feature-icon">🌿</div>
+                    <h3 class="feature-title">100% Aman & Ramah Lingkungan</h3>
+                    <p>Bebas bahan kimia berbahaya, aman untuk keluarga, hewan peliharaan, dan lingkungan. Tidak meninggalkan residu toxic!</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="testimonials fade-in">
+    <!-- Gallery Section -->
+    <section class="gallery">
         <div class="container">
-            <div class="testimonial-header">
-                <h2>[TESTIMONIAL_HEADLINE]</h2>
-                <p>[TESTIMONIAL_SUBTITLE]</p>
+            <h2 class="section-title">📸 Lihat Transformasi Menakjubkan!</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Demo Before After - Efek Water Repellent" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjNjY3ZWVhIi8+Cjx0ZXh0IHg9IjEwMCIgeT0iOTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LXNpemU9IjE2Ij5CZWZvcmUgJmFtcDs8L3RleHQ+Cjx0ZXh0IHg9IjEwMCIgeT0iMTEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIxNiI+QWZ0ZXIgRGVtbzwvdGV4dD4KPC9zdmc+'">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Perlindungan Kaca - Crystal Clear" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjNzY0YmEyIi8+Cjx0ZXh0IHg9IjEwMCIgeT0iOTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LXNpemU9IjE2Ij5QZXJsaW5kdW5nYW48L3RleHQ+Cjx0ZXh0IHg9IjEwMCIgeT0iMTEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIxNiI+S2FjYSBLcmlzdGFsPC90ZXh0Pgo8L3N2Zz4='">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Coating Keramik - Mengkilap Sempurna" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjZmY2YjZiIi8+Cjx0ZXh0IHg9IjEwMCIgeT0iOTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LXNpemU9IjE2Ij5Db2F0aW5nPC90ZXh0Pjx0ZXh0IHg9IjEwMCIgeT0iMTEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIxNiI+S2VyYW1pazwvdGV4dD4KPC9zdmc+'">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1563298723-dcfebaa392e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Water Repellent - Air Langsung Mengalir" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjZWU1YTI0Ii8+Cjx0ZXh0IHg9IjEwMCIgeT0iOTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LXNpemU9IjE2Ij5XYXRlcjwvdGV4dD48dGV4dCB4PSIxMDAiIHk9IjExMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtc2l6ZT0iMTYiPlJlcGVsbGVudDwvdGV4dD4KPC9zdmc+'">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Anti Stain - Perlindungan Noda Maksimal" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjMmMzZTUwIi8+Cjx0ZXh0IHg9IjEwMCIgeT0iOTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LXNpemU9IjE2Ij5BbnRpIFN0YWluPC90ZXh0Pjx0ZXh0IHg9IjEwMCIgeT0iMTEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIxNiI+UHJvdGVjdGlvbjwvdGV4dD4KPC9zdmc+'">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Crystal Shine - Kilau Seperti Kristal" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjNjY3ZWVhIi8+Cjx0ZXh0IHg9IjEwMCIgeT0iOTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LXNpemU9IjE2Ij5DcnlzdGFsPC90ZXh0Pjx0ZXh0IHg9IjEwMCIgeT0iMTEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIxNiI+U2hpbmU8L3RleHQ+Cjwvc3ZnPg=='">
+                </div>
             </div>
-            <div class="testimonial-grid">
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">💬 Testimoni Customer Yang Puas</h2>
+            <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"[TESTIMONIAL_1_TEXT]"</p>
-                    <strong>- [TESTIMONIAL_1_NAME], [TESTIMONIAL_1_TITLE]</strong>
+                    <p class="testimonial-text">"Gila! Kamar mandi saya yang dulunya kusam dan berjamur, sekarang mengkilap seperti hotel mewah! Crystal Shield ini beneran game changer. Air langsung ngalir turun, nggak ada bekas sama sekali!"</p>
+                    <p class="testimonial-author">- Sari M., Jakarta</p>
                 </div>
                 <div class="testimonial-card">
                     <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"[TESTIMONIAL_2_TEXT]"</p>
-                    <strong>- [TESTIMONIAL_2_NAME], [TESTIMONIAL_2_TITLE]</strong>
+                    <p class="testimonial-text">"Skeptis awalnya, tapi setelah pakai di kaca mobil, hujan sekencang apapun air langsung meluncur! Jadi nggak perlu sering-sering bersihin kaca. Worth it banget!"</p>
+                    <p class="testimonial-author">- Budi S., Bandung</p>
                 </div>
                 <div class="testimonial-card">
                     <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"[TESTIMONIAL_3_TEXT]"</p>
-                    <strong>- [TESTIMONIAL_3_NAME], [TESTIMONIAL_3_TITLE]</strong>
+                    <p class="testimonial-text">"Dapur saya yang dulunya cepat kotor karena minyak, sekarang mudah banget dibersihkan! Cukup dilap pakai kain basah, langsung bersih mengkilap. Recommended!"</p>
+                    <p class="testimonial-author">- Maya R., Surabaya</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Lantai keramik rumah saya jadi kayak baru lagi! Bahkan tamu-tamu pada nanya pakai pembersih apa. Efeknya tahan lama banget, udah 4 bulan masih mengkilap!"</p>
+                    <p class="testimonial-author">- Andi P., Medan</p>
                 </div>
             </div>
         </div>
@@ -527,47 +635,94 @@
 
     <!-- Urgency Section -->
     <section class="urgency">
-        <div class="container">
-            <h2>⚠️ STOK TINGGAL <span id="stock">[STOCK_COUNT]</span> UNIT!</h2>
-            <p>[URGENCY_TEXT]</p>
-            <div class="countdown" id="countdown">Promo berakhir dalam: 23:59:45</div>
-            <button class="cta-button" onclick="orderNow()">[URGENCY_CTA]</button>
+        <div class="urgency-content">
+            <h2 class="urgency-title">🚨 JANGAN SAMPAI KEHABISAN!</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 2rem;">
+                Stok terbatas! Hanya tersisa <strong id="urgency-stock">23 unit</strong> untuk hari ini. 
+                Lebih dari <strong>500 orang</strong> sudah menambahkan ke keranjang dalam 1 jam terakhir!
+            </p>
+            <p style="font-size: 1.1rem; opacity: 0.9;">
+                ⚡ Promo BELI 2 GRATIS 1 hanya berlaku untuk 50 pembeli pertama hari ini!<br>
+                🎯 Sudah <strong id="buyers-today">37 orang</strong> yang berhasil mendapatkan promo ini.
+            </p>
         </div>
     </section>
 
-    <!-- Final CTA -->
-    <section class="final-cta" id="order">
+    <!-- Order Section -->
+    <section class="order-section">
         <div class="container">
-            <h2>[FINAL_HEADLINE]</h2>
-            
-            <div class="price-section">
-                <div class="price">
-                    <span class="old-price">[OLD_PRICE]</span><br>
-                    <span>[NEW_PRICE]</span>
+            <h2 class="section-title">💰 Penawaran Khusus Hari Ini!</h2>
+            <div class="price-box">
+                <p class="original-price">Harga Normal: Rp 299.000</p>
+                <p class="current-price">Rp 199.000</p>
+                <div class="offer-text">
+                    🎉 BELI 2 GRATIS 1! 🎉<br>
+                    Hemat hingga Rp 299.000!
                 </div>
-                
-                <div class="guarantee">
-                    [GUARANTEE_LIST]
-                </div>
-                
-                <button class="cta-button" onclick="orderNow()" style="font-size: 1.6rem; padding: 25px 60px;">
-                    [FINAL_CTA_TEXT]
-                </button>
-                
-                <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
-                    [DISCLAIMER_TEXT]
+                <p style="margin: 1rem 0; color: #666;">
+                    ✅ Gratis Ongkir Seluruh Indonesia<br>
+                    ✅ Garansi 30 Hari Uang Kembali<br>
+                    ✅ Customer Service 24/7
+                </p>
+                <a href="https://mila.orderonline.id/crystal-shield-spray" class="cta-button" style="font-size: 1.1rem; padding: 1.2rem 3rem;">
+                    🛒 PESAN SEKARANG - BELI 2 GRATIS 1!
+                </a>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: #999;">
+                    Pembayaran aman dengan berbagai metode
                 </p>
             </div>
         </div>
     </section>
 
+    <!-- Floating Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-avatar"></div>
+        <div style="display: inline-block;">
+            <strong id="notification-name">Sarah dari Jakarta</strong><br>
+            <small id="notification-text">Baru saja memesan 2 botol Crystal Shield Spray</small>
+        </div>
+    </div>
+
     <script>
-        // REPLACE WITH ACTUAL ORDER URL
-        function orderNow() {
-            window.location.href = '[ORDER_URL]';
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hide');
+            }, 1500);
+        });
+
+        // Dynamic Counters
+        function updateCounters() {
+            const viewers = document.getElementById('viewers');
+            const stock = document.getElementById('stock');
+            const sold = document.getElementById('sold');
+            const urgencyStock = document.getElementById('urgency-stock');
+            const buyersToday = document.getElementById('buyers-today');
+            
+            // Simulate dynamic changes
+            const currentViewers = parseInt(viewers.textContent);
+            const currentStock = parseInt(stock.textContent);
+            const currentSold = parseInt(sold.textContent);
+            const currentBuyers = parseInt(buyersToday.textContent);
+            
+            // Random fluctuations
+            viewers.textContent = Math.max(1000, currentViewers + Math.floor(Math.random() * 20) - 10);
+            
+            if(Math.random() < 0.3) { // 30% chance to decrease stock
+                const newStock = Math.max(10, currentStock - 1);
+                stock.textContent = newStock;
+                urgencyStock.textContent = newStock;
+                sold.textContent = currentSold + 1;
+                
+                if(Math.random() < 0.5) {
+                    buyersToday.textContent = Math.min(49, currentBuyers + 1);
+                }
+            }
         }
         
-        // Countdown timer
+        setInterval(updateCounters, 5000);
+
+        // Countdown Timer
         function updateCountdown() {
             const now = new Date().getTime();
             const tomorrow = new Date();
@@ -575,53 +730,202 @@
             tomorrow.setHours(0, 0, 0, 0);
             const distance = tomorrow.getTime() - now;
             
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const hours = Math.floor(distance / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
             
-            document.getElementById('countdown').innerHTML = `Promo berakhir dalam: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
         }
         
-        // Dynamic viewers count
-        function updateViewers() {
-            const viewers = document.getElementById('viewers');
-            const currentCount = parseInt(viewers.textContent);
-            const change = Math.floor(Math.random() * 5) - 2;
-            const newCount = Math.max(50, Math.min(100, currentCount + change));
-            viewers.textContent = newCount;
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Floating Notifications
+        const notifications = [
+            {name: "Sarah dari Jakarta", text: "Baru saja memesan 2 botol Crystal Shield Spray"},
+            {name: "Budi dari Bandung", text: "Mendapatkan promo BELI 2 GRATIS 1"},
+            {name: "Maya dari Surabaya", text: "Memesan 3 botol untuk keluarga besar"},
+            {name: "Andi dari Medan", text: "Repeat order karena sangat puas"},
+            {name: "Siti dari Yogyakarta", text: "Baru saja checkout dengan promo spesial"},
+            {name: "Rahman dari Makassar", text: "Memesan untuk semua kamar mandi rumah"},
+            {name: "Linda dari Semarang", text: "Sangat terkesan dengan hasilnya"},
+            {name: "Agus dari Palembang", text: "Recommend ke teman-teman"}
+        ];
+        
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            const randomNotif = notifications[Math.floor(Math.random() * notifications.length)];
+            
+            document.getElementById('notification-name').textContent = randomNotif.name;
+            document.getElementById('notification-text').textContent = randomNotif.text;
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
         }
         
-        // Dynamic stock count
-        function updateStock() {
-            const stock = document.getElementById('stock');
-            const currentStock = parseInt(stock.textContent);
-            if (currentStock > 10 && Math.random() < 0.3) {
-                stock.textContent = currentStock - 1;
-            }
+        // Show notifications every 8-12 seconds
+        function scheduleNextNotification() {
+            const delay = Math.random() * 4000 + 8000; // 8-12 seconds
+            setTimeout(() => {
+                showNotification();
+                scheduleNextNotification();
+            }, delay);
         }
         
-        // Scroll animations
-        function handleScrollAnimations() {
-            const elements = document.querySelectorAll('.fade-in');
+        scheduleNextNotification();
+
+        // Smooth scrolling for CTA buttons
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.feature-card, .testimonial-card, .gallery-item');
+            
             elements.forEach(element => {
                 const elementTop = element.getBoundingClientRect().top;
                 const elementVisible = 150;
                 
                 if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('visible');
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
                 }
             });
         }
+
+        // Initialize scroll animations
+        document.querySelectorAll('.feature-card, .testimonial-card, .gallery-item').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(50px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll();
+
+        // Enhanced CTA tracking
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function() {
+                // Add some visual feedback
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+
+        // Add urgency to stock updates
+        let lastStock = parseInt(document.getElementById('stock').textContent);
+        setInterval(() => {
+            const currentStock = parseInt(document.getElementById('stock').textContent);
+            if (currentStock < lastStock) {
+                // Flash effect when stock decreases
+                const stockElements = document.querySelectorAll('#stock, #urgency-stock');
+                stockElements.forEach(el => {
+                    el.style.animation = 'flash 0.5s ease-in-out';
+                    setTimeout(() => {
+                        el.style.animation = '';
+                    }, 500);
+                });
+                lastStock = currentStock;
+            }
+        }, 1000);
+
+        // Add CSS for flash animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes flash {
+                0%, 100% { background-color: transparent; }
+                50% { background-color: rgba(255, 107, 107, 0.3); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Mobile menu toggle (if needed)
+        function checkMobile() {
+            if (window.innerWidth <= 768) {
+                document.body.classList.add('mobile');
+            } else {
+                document.body.classList.remove('mobile');
+            }
+        }
         
-        // Initialize
-        setInterval(updateCountdown, 1000);
-        setInterval(updateViewers, 15000);
-        setInterval(updateStock, 45000);
+        window.addEventListener('resize', checkMobile);
+        checkMobile();
+
+        // Optimize performance
+        let ticking = false;
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(animateOnScroll);
+                ticking = true;
+                setTimeout(() => ticking = false, 16);
+            }
+        }
         
-        window.addEventListener('scroll', handleScrollAnimations);
-        
-        updateCountdown();
-        handleScrollAnimations();
+        window.addEventListener('scroll', requestTick);
+
+        // Add interaction analytics (placeholder)
+        function trackInteraction(action, element) {
+            console.log(`User ${action} on ${element}`);
+            // Here you could send data to analytics service
+        }
+
+        // Track various interactions
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('cta-button')) {
+                trackInteraction('clicked', 'CTA button');
+            }
+            if (e.target.closest('.feature-card')) {
+                trackInteraction('viewed', 'feature card');
+            }
+        });
+
+        // Add exit-intent popup (simplified version)
+        let hasShownExitIntent = false;
+        document.addEventListener('mouseleave', (e) => {
+            if (e.clientY <= 0 && !hasShownExitIntent && window.scrollY > 500) {
+                hasShownExitIntent = true;
+                // Could show additional offer modal here
+                console.log('Exit intent detected - could show special offer');
+            }
+        });
+
+        // Lazy loading for images (basic implementation)
+        const images = document.querySelectorAll('img[data-src]');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+
+        images.forEach(img => imageObserver.observe(img));
+
+        // Add social proof counter
+        let socialProofCount = 1247;
+        setInterval(() => {
+            if (Math.random() < 0.4) {
+                socialProofCount += Math.floor(Math.random() * 3) + 1;
+                document.getElementById('viewers').textContent = socialProofCount;
+            }
+        }, 3000);
+
     </script>
 </body>
 </html>
